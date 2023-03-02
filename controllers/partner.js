@@ -13,13 +13,10 @@ router.get('/', async (req, res) => {
     return res.status(500).json({ message: 'error looking for partners', error })
   }
 })
-router.post('/partnerId', async (req, res) => {
+
+router.get('/query', async (req, res) => {
   try {
-    /* const partner = await PartnerModel.findOne({
-      documentType: req.params.documentType,
-      partnerId: req.params.partnerId
-    }) */
-    const partner = await PartnerModel.findOne(req.body)
+    const partner = await PartnerModel.findOne(req.query)
     return res.json(partner)
   } catch (error) {
     return res
@@ -28,11 +25,27 @@ router.post('/partnerId', async (req, res) => {
   }
 })
 
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const partner = new PartnerModel(req.body)
 
     const data = await partner.save()
+
+    return res.json(data)
+  } catch (error) {
+    console.log(error)
+    if (error.code === 11000) return res.status(500).json({ message: 'partner already registered' })
+
+    return res.status(400).json({ message: 'error registering data', error })
+  }
+})
+
+router.put('/:id', async (req, res) => {
+  try {
+    const data = await PartnerModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    })
 
     return res.json(data)
   } catch (error) {

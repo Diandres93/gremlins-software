@@ -13,11 +13,19 @@ export const roles = {
 const UserSchema = new Schema(
   {
     userId: {
-      type: String,
+      type: Number,
       required: true,
       unique: true
     },
+    password: {
+      type: String,
+      required: true
+    },
     name: {
+      type: String,
+      required: true
+    },
+    lastName: {
       type: String,
       required: true
     },

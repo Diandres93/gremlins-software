@@ -1,17 +1,13 @@
 import mongoose from 'mongoose'
-const { Schema, model } = mongoose
+const { Schema, model, Types } = mongoose
 
 const ProductSchema = new Schema(
   {
     partnerId: {
-      type: Number,
+      type: Types.ObjectId,
       required: true,
-      unique: true
+      ref: 'partner'
     },
-    /*    productId: {
-      type: ID,
-      required: true
-    }, */
     name: {
       type: String,
       required: true

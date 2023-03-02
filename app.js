@@ -7,10 +7,10 @@ import { createServer } from 'http'
 import cors from 'cors'
 
 // import controllers
-// simport { personController } from './controllers/person.js'
 import { userController } from './controllers/user.js'
 import { partnerController } from './controllers/partner.js'
 import { productController } from './controllers/product.js'
+import { orderController } from './controllers/order.js'
 
 // config express
 dotenv.config()
@@ -23,6 +23,7 @@ app.set('port', process.env.PORT || 3001)
 app.use('/user', userController)
 app.use('/partner', partnerController)
 app.use('/product', productController)
+app.use('/order', orderController)
 
 // DB
 mongoose.connect(

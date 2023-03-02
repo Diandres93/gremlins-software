@@ -6,6 +6,11 @@ export const types = {
   DISTRIBUIDOR: 'DISTRIBUIDOR'
 }
 
+export const documentTypes = {
+  CC: 'CC',
+  NIT: 'NIT'
+}
+
 const PartnerSchema = new Schema(
   {
     name: {
@@ -18,12 +23,12 @@ const PartnerSchema = new Schema(
     },
     documentType: {
       type: String,
+      enum: Object.keys(documentTypes),
       required: true
     },
     partnerId: {
       type: Number,
-      required: true,
-      unique: true
+      required: true
     },
     phone: {
       type: String,
